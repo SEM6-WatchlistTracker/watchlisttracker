@@ -19,7 +19,7 @@ spec:
         image: test-service
         ports:
           - name: http
-            containerPort: 8501 # The port that the container exposes
+            containerPort: 8000 # The port that the container exposes
 ---
 apiVersion: v1                # API version
 kind: Service                 # Type of the kubernetes resource
@@ -33,5 +33,5 @@ spec:
     app: test-service   # The service exposes Pods with label `app=polling-app-server`
   ports:                      # Forward incoming connections on port 8080 to the target port 8080
   - name: http
-    port: 8501
-    targetPort: 8501
+    port: 8000
+    targetPort: 8000
