@@ -1,0 +1,37 @@
+apiVersion: apps/v1           # API version
+kind: Deployment              # Type of kubernetes resource
+metadata:
+  name: test-service    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: test-service
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: test-service
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: test-service
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+      - name: test-service
+        image: test-service
+        ports:
+          - name: http
+            containerPort: 8501 # The port that the container exposes
+---
+apiVersion: v1                # API version
+kind: Service                 # Type of the kubernetes resource
+metadata:                     
+  name: test-service    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: test-service
+spec:                         
+  type: ClusterIP                # Exposes the service by opening a port on each node
+  selector:
+    app: test-service   # The service exposes Pods with label `app=polling-app-server`
+  ports:                      # Forward incoming connections on port 8080 to the target port 8080
+  - name: http
+    port: 8501
+    targetPort: 8501

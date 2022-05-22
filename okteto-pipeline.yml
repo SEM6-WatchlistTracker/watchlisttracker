@@ -1,0 +1,9 @@
+deploy:
+  - okteto build -t okteto.dev/gateway:${OKTETO_GIT_COMMIT} gateway
+  - okteto build -t okteto.dev/test-service:${OKTETO_GIT_COMMIT} test-service
+  - cd k8s && kustomize edit set image gateway=okteto.dev/gateway:${OKTETO_GIT_COMMIT}
+  - cd k8s && kustomize edit set image test-service=okteto.dev/test-service:${OKTETO_GIT_COMMIT}
+  - kubectl apply -k k8s
+devs:
+  - gateway/okteto.yml
+  - test-service/okteto.yml
