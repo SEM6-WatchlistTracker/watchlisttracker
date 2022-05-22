@@ -14,9 +14,12 @@
 	<name>test-service</name>
 	<description>WatchlistTracker Service</description>
 	<properties>
-		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
 		<spring-cloud.version>2021.0.1</spring-cloud.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -39,4 +42,18 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<jvmArguments>
+						-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006
+					</jvmArguments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
