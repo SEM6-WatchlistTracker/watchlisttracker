@@ -19,22 +19,22 @@ spec:
         image: okteto.dev/organization-service:dev
         ports:
         - containerPort: 8080
-        env:
-        - name: MONGO_DATABASE
-          valueFrom:
-            configMapKeyRef:
-              name: mongodb
-              key: database-name
-        - name: MONGO_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mongodb
-              key: database-user
-        - name: MONGO_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mongodb
-              key: database-password
+        # env:
+        # - name: MONGO_DATABASE
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: mongodb
+        #       key: database-name
+        # - name: MONGO_USERNAME
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: mongodb
+        #       key: database-user
+        # - name: MONGO_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: mongodb
+        #       key: database-password
 ---
 apiVersion: v1
 kind: Service
