@@ -41,13 +41,13 @@ public class OrganizationController {
 	}
 	
 	@GetMapping("/{id}")
-	public Organization findById(@PathVariable("id") String id) {
+	public Organization findById(@PathVariable("id") ObjectId id) {
 		LOGGER.info("Organization find: id={}", id);
 		return repository.findById(id).get();
 	}
 
 	@GetMapping("/{id}/with-departments")
-	public Organization findByIdWithDepartments(@PathVariable("id") String id) {
+	public Organization findByIdWithDepartments(@PathVariable("id") ObjectId id) {
 		LOGGER.info("Organization find: id={}", id);
 		Optional<Organization> organization = repository.findById(id);
 		if (organization.isPresent()) {
@@ -60,7 +60,7 @@ public class OrganizationController {
 	}
 	
 	@GetMapping("/{id}/with-departments-and-employees")
-	public Organization findByIdWithDepartmentsAndEmployees(@PathVariable("id") String id) {
+	public Organization findByIdWithDepartmentsAndEmployees(@PathVariable("id") ObjectId id) {
 		LOGGER.info("Organization find: id={}", id);
 		Optional<Organization> organization = repository.findById(id);
 		if (organization.isPresent()) {
@@ -73,7 +73,7 @@ public class OrganizationController {
 	}
 	
 	@GetMapping("/{id}/with-employees")
-	public Organization findByIdWithEmployees(@PathVariable("id") String id) {
+	public Organization findByIdWithEmployees(@PathVariable("id") ObjectId id) {
 		LOGGER.info("Organization find: id={}", id);
 		Optional<Organization> organization = repository.findById(id);
 		if (organization.isPresent()) {

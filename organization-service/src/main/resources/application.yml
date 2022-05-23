@@ -5,7 +5,6 @@ spring:
     mongodb:
       uri: mongodb+srv://admin-user:IldownVlfUPbyFtE@user-repository.z68aw.mongodb.net/organization-database?retryWrites=true&w=majority
       database: organization-database
-      # uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb/${MONGO_DATABASE}
       
 logging:
   pattern: 

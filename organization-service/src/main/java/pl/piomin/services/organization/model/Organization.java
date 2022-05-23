@@ -3,14 +3,15 @@ package pl.piomin.services.organization.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("organization")
+@Document("organizations")
 public class Organization {
 
 	@Id
-	private String id;
+	private ObjectId id;
 	private String name;
 	private String address;
 	private List<Department> departments = new ArrayList<>();
@@ -25,11 +26,11 @@ public class Organization {
 		this.address = address;
 	}
 
-	public String getId() {
+	public ObjectId getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(ObjectId id) {
 		this.id = id;
 	}
 

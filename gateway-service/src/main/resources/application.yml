@@ -10,18 +10,6 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: employee
-          uri: lb://employee
-          predicates:
-            - Path=/employee/**
-          filters:
-            - RewritePath=/employee/(?<path>.*), /$\{path}
-        - id: department
-          uri: lb://department
-          predicates:
-            - Path=/department/**
-          filters:
-            - RewritePath=/department/(?<path>.*), /$\{path}
         - id: organization
           uri: lb://organization
           predicates:
