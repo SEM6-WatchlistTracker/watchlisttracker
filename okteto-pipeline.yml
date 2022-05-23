@@ -1,7 +1,7 @@
 icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
 deploy:
   - kubectl apply -f k8s/mongodb-database.yaml
-  - okteto build -t okteto.dev/discovery-service:dev -f admin-service/Dockerfile discovery-service
+  - okteto build -t okteto.dev/discovery-service:dev -f discovery-service/Dockerfile discovery-service
   - okteto build -t okteto.dev/gateway-service:dev -f gateway-service/Dockerfile gateway-service
   - okteto build -t okteto.dev/organization-service:dev -f organization-service/Dockerfile organization-service
   - kubectl apply -f k8s
