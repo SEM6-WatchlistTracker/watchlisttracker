@@ -44,10 +44,17 @@ public class OrganizationController {
 		return repository.findById(id).get();
 	}
 
-	@GetMapping() // /organization?id={id}
+	@GetMapping("/find") // /organization/find?id={id}
 	public Organization findByIdTest(@RequestParam("id") ObjectId id) {
 		LOGGER.info("Organization find requestvar: id={}", id);
 		return repository.findById(id).get();
+	}
+
+	@ResponseBody
+	@RequestMapping(path="/test", method = RequestMethod.GET) 
+	public String test() {
+		LOGGER.info("Organization test");
+		return "test";
 	}
 
 	@PostMapping
