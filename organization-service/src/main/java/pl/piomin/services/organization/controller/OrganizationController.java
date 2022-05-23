@@ -38,7 +38,7 @@ public class OrganizationController {
 	}
 	
 	@GetMapping("/testing")
-	public List<Organization> findAllTest() {
+	public List<Organization> findAllTesting() {
 		LOGGER.info("Organization find testing");
 		return null;
 	}
