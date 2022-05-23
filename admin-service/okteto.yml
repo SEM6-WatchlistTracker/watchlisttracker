@@ -1,4 +1,4 @@
-name: discovery
+name: admin
 image: okteto/maven:latest
 command: bash
 workdir: /okteto

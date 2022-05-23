@@ -1,6 +1,6 @@
 spring:
   applicaton:
-    name: discovery
+    name: admin
   cloud:
     kubernetes:
       discovery:

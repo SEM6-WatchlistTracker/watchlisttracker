@@ -1,4 +1,4 @@
-package pl.piomin.services.discovery;
+package pl.piomin.services.admin;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
@@ -11,10 +11,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAdminServer
 @EnableDiscoveryClient
 @EnableScheduling
-public class DiscoveryApplication {
+public class AdminApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DiscoveryApplication.class, args);
+		SpringApplication.run(AdminApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package pl.piomin.services.discovery.config;
+package pl.piomin.services.admin.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

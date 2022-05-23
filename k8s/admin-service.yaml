@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: discovery
+  name: admin
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: discovery
+      app: admin
   template:
     metadata:
       labels:
-        app: discovery
+        app: admin
     spec:
       containers:
-      - name: discovery
-        image: okteto.dev/discovery-service:dev
+      - name: admin
+        image: okteto.dev/admin-service:dev
         ports:
         - containerPort: 8080
 ---
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: discovery
+  name: admin
 data:
   application.yml: |-
     spring:
@@ -35,13 +35,13 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: discovery
+  name: admin
   annotations:
     dev.okteto.com/auto-ingress: "true"
 spec:
   type: ClusterIP
   selector:
-    app: discovery
+    app: admin
   ports:
   - port: 8080
     targetPort: 8080
