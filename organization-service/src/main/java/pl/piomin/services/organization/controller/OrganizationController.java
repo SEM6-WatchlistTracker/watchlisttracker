@@ -59,7 +59,7 @@ public class OrganizationController {
 		return "test";
 	}
 
-	@RequestMapping(value="/test2", method = GET) 
+	@RequestMapping(value="/test2", method = RequestMethod.GET) 
 	@ResponseBody
 	public String test2() {
 		LOGGER.info("Organization test2");
