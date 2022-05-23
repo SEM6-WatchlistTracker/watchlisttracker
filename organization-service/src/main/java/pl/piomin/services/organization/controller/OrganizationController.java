@@ -2,6 +2,7 @@ package pl.piomin.services.organization.controller;
 
 import org.bson.types.ObjectId;
 import java.util.Optional;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import pl.piomin.services.organization.model.Organization;
 import pl.piomin.services.organization.repository.OrganizationRepository;
 
 @RestController
+@RequestMapping()
 public class OrganizationController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
@@ -35,11 +37,11 @@ public class OrganizationController {
 		return repository.save(organization);
 	}
 	
-	// @GetMapping("/")
-	// public Iterable<Organization> findAll() {
-	// 	LOGGER.info("Organization find");
-	// 	return repository.findAll();
-	// }
+	@GetMapping()
+	public List<Organization> findAll() {
+		LOGGER.info("Organization find");
+		return repository.findAll();
+	}
 	
 	@GetMapping("/{id}")
 	public Organization findById(@PathVariable("id") ObjectId id) {
