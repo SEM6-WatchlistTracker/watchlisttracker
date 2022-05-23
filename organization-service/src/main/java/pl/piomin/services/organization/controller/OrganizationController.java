@@ -35,11 +35,11 @@ public class OrganizationController {
 		return repository.save(organization);
 	}
 	
-	@GetMapping("/")
-	public Iterable<Organization> findAll() {
-		LOGGER.info("Organization find");
-		return repository.findAll();
-	}
+	// @GetMapping("/")
+	// public Iterable<Organization> findAll() {
+	// 	LOGGER.info("Organization find");
+	// 	return repository.findAll();
+	// }
 	
 	@GetMapping("/{id}")
 	public Organization findById(@PathVariable("id") ObjectId id) {
