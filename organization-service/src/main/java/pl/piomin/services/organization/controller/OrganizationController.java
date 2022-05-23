@@ -37,7 +37,7 @@ public class OrganizationController {
 		return repository.save(organization);
 	}
 	
-	@GetMapping("/testing")
+	@GetMapping(path = "/testing")
 	public List<Organization> findAllTesting() {
 		LOGGER.info("Organization find testing");
 		return null;
