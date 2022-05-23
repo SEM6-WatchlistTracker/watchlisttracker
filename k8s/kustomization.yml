@@ -1,9 +1,0 @@
-resources:
-- gateway.yml
-- test-service.yml
-- ingressv1.yml
-images:
-- name: gateway
-- name: test-service
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization

@@ -1,0 +1,9 @@
+spring:
+  applicaton:
+    name: discovery
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: false
+        service-labels:
+          spring-boot: true
