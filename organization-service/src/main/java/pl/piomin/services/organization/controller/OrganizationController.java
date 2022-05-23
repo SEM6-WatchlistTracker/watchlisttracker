@@ -35,7 +35,7 @@ public class OrganizationController {
 		return repository.save(organization);
 	}
 	
-	@GetMapping
+	@GetMapping("/")
 	public Iterable<Organization> findAll() {
 		LOGGER.info("Organization find");
 		return repository.findAll();
