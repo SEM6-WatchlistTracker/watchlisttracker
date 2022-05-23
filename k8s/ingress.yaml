@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: gateway
+  name: watchlisttracker
   annotations:
     dev.okteto.com/generate-host: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
