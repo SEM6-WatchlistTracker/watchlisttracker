@@ -5,6 +5,6 @@ COPY . /code/
 RUN --mount=type=cache,target=/root/.m2 mvn package
 
 FROM openjdk:8-jdk-alpine
-COPY --from=build /code/target/discovery-1.0.jar discovery-1.0.jar
+COPY --from=build /code/target/discovery-service-1.0.jar discovery-service-1.0.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/discovery-1.0.jar"]
+ENTRYPOINT ["java", "-jar", "/discovery-service-1.0.jar"]
