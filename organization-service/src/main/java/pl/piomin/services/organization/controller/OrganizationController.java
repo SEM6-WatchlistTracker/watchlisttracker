@@ -52,11 +52,18 @@ public class OrganizationController {
 		return repository.findById(id).get();
 	}
 
-	@ResponseBody
 	@RequestMapping(path="/test", method = RequestMethod.GET) 
+	@ResponseBody
 	public String test() {
 		LOGGER.info("Organization test");
 		return "test";
+	}
+
+	@RequestMapping(value="/test2", method = GET) 
+	@ResponseBody
+	public String test2() {
+		LOGGER.info("Organization test2");
+		return "test2";
 	}
 
 	@PostMapping
