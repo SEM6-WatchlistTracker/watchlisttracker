@@ -38,13 +38,19 @@ public class OrganizationController {
 		return repository.save(organization);
 	}
 	
-	// @GetMapping()
-	// public List<Organization> findAll() {
-	// 	LOGGER.info("Organization find");
-	// 	return repository.findAll();
-	// }
+	@GetMapping()
+	public List<Organization> findAll() {
+		LOGGER.info("Organization find");
+		return repository.findAll();
+	}
+
+	@GetMapping("/test")
+	public List<Organization> findAllTest() {
+		LOGGER.info("Organization find");
+		return repository.findAll();
+	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/test/{id}")
 	public Organization findById(@PathVariable("id") ObjectId id) {
 		LOGGER.info("Organization find: id={}", id);
 		return repository.findById(id).get();
