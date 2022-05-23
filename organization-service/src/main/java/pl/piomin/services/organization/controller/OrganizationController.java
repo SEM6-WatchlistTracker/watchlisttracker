@@ -37,16 +37,15 @@ public class OrganizationController {
 		return repository.save(organization);
 	}
 	
-	@GetMapping
-	public List<Organization> findAll() {
-		LOGGER.info("Organization find");
-		return repository.findAll();
+	@GetMapping("/testing")
+	public List<Organization> findAllTest() {
+		LOGGER.info("Organization find testing");
+		return null;
 	}
-
 	@GetMapping("organization/test")
 	public List<Organization> findAllTest() {
 		LOGGER.info("Organization find test");
-		return repository.findAll();
+		return null;
 	}
 	
 	@GetMapping("/test/{id}")
@@ -92,6 +91,12 @@ public class OrganizationController {
 		} else {
 			return null;
 		}
+	}
+
+	@GetMapping()
+	public List<Organization> findAll() {
+		LOGGER.info("Organization find");
+		return repository.findAll();
 	}
 	
 }
