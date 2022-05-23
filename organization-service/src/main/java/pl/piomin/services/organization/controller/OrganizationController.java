@@ -45,7 +45,7 @@ public class OrganizationController {
 	}
 
 	@GetMapping() // /organization?id={id}
-	public Organization findById(@RequestParam("id") ObjectId id) {
+	public Organization findByIdTest(@RequestParam("id") ObjectId id) {
 		LOGGER.info("Organization find requestvar: id={}", id);
 		return repository.findById(id).get();
 	}
