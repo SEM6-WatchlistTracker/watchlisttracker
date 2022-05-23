@@ -11,10 +11,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAdminServer
 @EnableDiscoveryClient
 @EnableScheduling
-public class AdminApplication {
+public class DiscoveryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AdminApplication.class, args);
+		SpringApplication.run(DiscoveryApplication.class, args);
 	}
 
 }
