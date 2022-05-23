@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.piomin.services.organization.client.DepartmentClient;
@@ -31,72 +32,27 @@ public class OrganizationController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@PostMapping
-	public Organization add(@RequestBody Organization organization) {
-		LOGGER.info("Organization add: {}", organization);
-		return repository.save(organization);
-	}
-	
-	@GetMapping(path = "/testing")
-	public List<Organization> findAllTesting() {
-		LOGGER.info("Organization find testing");
-		return null;
-	}
-	@GetMapping("organization/test")
-	public List<Organization> findAllTest() {
-		LOGGER.info("Organization find test");
-		return null;
-	}
-	
-	@GetMapping("/test/{id}")
-	public Organization findById(@PathVariable("id") ObjectId id) {
-		LOGGER.info("Organization find: id={}", id);
-		return repository.findById(id).get();
-	}
-
-	@GetMapping("/{id}/with-departments")
-	public Organization findByIdWithDepartments(@PathVariable("id") ObjectId id) {
-		LOGGER.info("Organization find: id={}", id);
-		Optional<Organization> organization = repository.findById(id);
-		if (organization.isPresent()) {
-			Organization o = organization.get();
-			o.setDepartments(departmentClient.findByOrganization(o.getId()));
-			return o;
-		} else {
-			return null;
-		}
-	}
-	
-	@GetMapping("/{id}/with-departments-and-employees")
-	public Organization findByIdWithDepartmentsAndEmployees(@PathVariable("id") ObjectId id) {
-		LOGGER.info("Organization find: id={}", id);
-		Optional<Organization> organization = repository.findById(id);
-		if (organization.isPresent()) {
-			Organization o = organization.get();
-			o.setDepartments(departmentClient.findByOrganizationWithEmployees(o.getId()));
-			return o;
-		} else {
-			return null;
-		}
-	}
-	
-	@GetMapping("/{id}/with-employees")
-	public Organization findByIdWithEmployees(@PathVariable("id") ObjectId id) {
-		LOGGER.info("Organization find: id={}", id);
-		Optional<Organization> organization = repository.findById(id);
-		if (organization.isPresent()) {
-			Organization o = organization.get();
-			o.setEmployees(employeeClient.findByOrganization(o.getId()));
-			return o;
-		} else {
-			return null;
-		}
-	}
-
 	@GetMapping()
 	public List<Organization> findAll() {
 		LOGGER.info("Organization find");
 		return repository.findAll();
 	}
 	
+	@GetMapping("/{id}")
+	public Organization findById(@PathVariable("id") ObjectId id) {
+		LOGGER.info("Organization find pathvar: id={}", id);
+		return repository.findById(id).get();
+	}
+
+	@GetMapping() // /organization?id={id}
+	public Organization findById(@RequestParam("id") ObjectId id) {
+		LOGGER.info("Organization find requestvar: id={}", id);
+		return repository.findById(id).get();
+	}
+
+	@PostMapping
+	public Organization add(@RequestBody Organization organization) {
+		LOGGER.info("Organization add: {}", organization);
+		return repository.save(organization);
+	}
 }
