@@ -23,7 +23,6 @@ import pl.piomin.services.organization.model.Organization;
 import pl.piomin.services.organization.repository.OrganizationRepository;
 
 @RestController
-@RequestMapping
 public class OrganizationController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
@@ -35,47 +34,42 @@ public class OrganizationController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@GetMapping
+	@GetMapping // organizations/
 	public List<Organization> findAll() {
 		LOGGER.info("Organization find");
 		return repository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Organization findById(@PathVariable("id") ObjectId id) {
+	public Organization findById(@PathVariable("id") String id) {
 		LOGGER.info("Organization find pathvar: id={}", id);
 		return repository.findById(id).get();
 	}
 
-	@GetMapping("/find") // /organization/find?id={id}
-	public Organization findByIdTest(@RequestParam("id") ObjectId id) {
-		LOGGER.info("Organization find requestvar: id={}", id);
-		return repository.findById(id).get();
-	}
-
-	@GetMapping("/testing")
-	public String testing() {
-		LOGGER.info("Organization testing");
-		return "org/testing";
-	}
-
-	@RequestMapping(path="/test", method = RequestMethod.GET) 
-	@ResponseBody
-	public String test() {
-		LOGGER.info("Organization test");
-		return "org/test";
-	}
-
-	@RequestMapping(value="/test2", method = RequestMethod.GET) 
-	@ResponseBody
-	public String test2() {
-		LOGGER.info("Organization test2");
-		return "org/test2";
+	@GetMapping("/{id}/with-departments")
+	public Organization findByIdWithDepartments(@PathVariable("id") String id) {
+		LOGGER.info("Organization find: id={}", id);
+		Optional<Organization> organization = repository.findById(id);
+		if (organization.isPresent()) {
+			Organization o = organization.get();
+			o.setDepartments(departmentClient.findByOrganization(o.getId()));
+			return o;
+		} else {
+			return null;
+		}
 	}
 
 	@PostMapping
 	public Organization add(@RequestBody Organization organization) {
 		LOGGER.info("Organization add: {}", organization);
 		return repository.save(organization);
+	}
+
+
+	// test
+	@GetMapping("/testing")
+	public String testing() {
+		LOGGER.info("Organization testing");
+		return "org/testing";
 	}
 }

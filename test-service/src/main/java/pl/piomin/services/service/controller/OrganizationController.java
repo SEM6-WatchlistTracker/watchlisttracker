@@ -31,51 +31,13 @@ public class OrganizationController {
 	@Autowired
 	OrganizationRepository repository;
 	@Autowired
-	DepartmentClient departmentClient;
+	OrganizationClient organizationClient;
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@GetMapping()
-	public List<Organization> findAll() {
-		LOGGER.info("test find");
-		return repository.findAll();
-	}
-	
-	@GetMapping("/{id}")
-	public Organization findById(@PathVariable("id") ObjectId id) {
-		LOGGER.info("test find pathvar: id={}", id);
-		return repository.findById(id).get();
-	}
-
-	@GetMapping("/find") // /organization/find?id={id}
-	public Organization findByIdTest(@RequestParam("id") ObjectId id) {
-		LOGGER.info("test find requestvar: id={}", id);
-		return repository.findById(id).get();
-	}
-
-	@GetMapping("/testing")
-	public String testing() {
-		LOGGER.info("test testing");
-		return "test/testing";
-	}
-
-	@RequestMapping(path="/test", method = RequestMethod.GET) 
-	@ResponseBody
-	public String test() {
-		LOGGER.info("test test");
-		return "test/test";
-	}
-
-	@RequestMapping(value="/test2", method = RequestMethod.GET) 
-	@ResponseBody
-	public String test2() {
-		LOGGER.info("test test2");
-		return "test/test2";
-	}
-
-	@PostMapping
-	public Organization add(@RequestBody Organization organization) {
-		LOGGER.info("test add: {}", organization);
-		return repository.save(organization);
-	}
+	@GetMapping("/organization/{organizationId}")
+    public List<Department> findByOrganization(@PathVariable("organizationId") String organizationId) {
+        LOGGER.info("Department find: organizationId={}", organizationId);
+        return organizationClient.findByOrganizationId(organizationId);
+    }
 }

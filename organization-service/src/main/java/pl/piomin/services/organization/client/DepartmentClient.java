@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import pl.piomin.services.organization.model.Department;
 
-@FeignClient(name = "department")
+@FeignClient(name = "test")
 public interface DepartmentClient {
 
-	@GetMapping("/organization/{organizationId}")
-	public List<Department> findByOrganization(@PathVariable("organizationId") ObjectId organizationId);
+	@GetMapping("/organizations/{organizationId}")
+	public List<Department> findByOrganization(@PathVariable("organizationId") String organizationId);
 	
-	@GetMapping("/organization/{organizationId}/with-employees")
-	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") ObjectId organizationId);
+	@GetMapping("/organizations/{organizationId}/with-employees")
+	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") String organizationId);
 	
 }
