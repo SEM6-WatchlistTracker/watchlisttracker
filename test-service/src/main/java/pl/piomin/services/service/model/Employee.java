@@ -1,4 +1,4 @@
-package pl.piomin.services.organization.model;
+package pl.piomin.services.service.model;
 
 public class Employee {
 

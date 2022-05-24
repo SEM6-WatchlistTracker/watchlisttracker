@@ -1,4 +1,4 @@
-package pl.piomin.services.organization.controller;
+package pl.piomin.services.service.controller;
 
 import org.bson.types.ObjectId;
 import java.util.Optional;

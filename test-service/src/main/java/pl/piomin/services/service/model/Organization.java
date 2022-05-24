@@ -1,4 +1,4 @@
-package pl.piomin.services.organization.model;
+package pl.piomin.services.service.model;
 
 import java.util.ArrayList;
 import java.util.List;

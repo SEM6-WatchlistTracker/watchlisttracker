@@ -1,4 +1,4 @@
-package pl.piomin.services.organization;
+package pl.piomin.services.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

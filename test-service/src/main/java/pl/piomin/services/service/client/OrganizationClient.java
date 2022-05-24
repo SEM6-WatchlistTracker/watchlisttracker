@@ -1,4 +1,4 @@
-package pl.piomin.services.organization.client;
+package pl.piomin.services.service.client;
 
 import java.util.List;
 

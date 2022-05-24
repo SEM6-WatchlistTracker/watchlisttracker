@@ -1,4 +1,4 @@
-package pl.piomin.services.organization.repository;
+package pl.piomin.services.service.repository;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
