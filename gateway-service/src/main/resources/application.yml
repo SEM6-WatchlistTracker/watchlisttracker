@@ -13,7 +13,7 @@ spring:
         - id: organization
           uri: lb://organization
           predicates:
-            - Path=/organization/**
+            - Path=/organization**
           filters:
             - RewritePath=/organization/(?<path>.*), /$\{path}
         - id: test
