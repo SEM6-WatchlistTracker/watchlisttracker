@@ -14,8 +14,14 @@ spring:
           uri: lb://organization
           predicates:
             - Path=/organization/**
-          # filters:
-          #   - RewritePath=/organization/(?<path>.*), /$\{path}
+          filters:
+            - RewritePath=/organization/(?<path>.*), /$\{path}
+        - id: test
+          uri: lb://test
+          predicates:
+            - Path=/test/**
+          filters:
+            - RewritePath=/test/(?<path>.*), /$\{path}
 logging:
   pattern: 
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"

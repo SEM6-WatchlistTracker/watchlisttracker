@@ -23,8 +23,8 @@ import pl.piomin.services.organization.model.Organization;
 import pl.piomin.services.organization.repository.OrganizationRepository;
 
 @RestController
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/")
+public class OrganizationController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
 	
@@ -35,41 +35,41 @@ public class TestController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@GetMapping()
+	@GetMapping("/")
 	public List<Organization> findAll() {
-		LOGGER.info("testcontroller");
+		LOGGER.info("test find");
 		return repository.findAll();
 	}
 	
 	@GetMapping("/{id}")
 	public Organization findById(@PathVariable("id") ObjectId id) {
-		LOGGER.info("Organization find pathvar: id={}", id);
+		LOGGER.info("test find pathvar: id={}", id);
 		return repository.findById(id).get();
 	}
 
 	@GetMapping("/find") // /organization/find?id={id}
 	public Organization findByIdTest(@RequestParam("id") ObjectId id) {
-		LOGGER.info("Organization find requestvar: id={}", id);
+		LOGGER.info("test find requestvar: id={}", id);
 		return repository.findById(id).get();
 	}
 
 	@RequestMapping(path="/test", method = RequestMethod.GET) 
 	@ResponseBody
 	public String test() {
-		LOGGER.info("Organization test");
+		LOGGER.info("test test");
 		return "test";
 	}
 
 	@RequestMapping(value="/test2", method = RequestMethod.GET) 
 	@ResponseBody
 	public String test2() {
-		LOGGER.info("Organization test2");
+		LOGGER.info("test test2");
 		return "test2";
 	}
 
 	@PostMapping
 	public Organization add(@RequestBody Organization organization) {
-		LOGGER.info("Organization add: {}", organization);
+		LOGGER.info("test add: {}", organization);
 		return repository.save(organization);
 	}
 }

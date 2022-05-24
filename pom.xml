@@ -9,6 +9,7 @@
 	<modules>
 		<module>admin-service</module>
 		<module>organization-service</module>
+		<module>test-service</module>
 		<module>gateway-service</module>
 	</modules>
 	

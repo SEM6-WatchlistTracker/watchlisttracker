@@ -3,8 +3,10 @@ deploy:
   - okteto build -t okteto.dev/admin-service:dev -f admin-service/Dockerfile admin-service
   - okteto build -t okteto.dev/gateway-service:dev -f gateway-service/Dockerfile gateway-service
   - okteto build -t okteto.dev/organization-service:dev -f organization-service/Dockerfile organization-service
+  - okteto build -t okteto.dev/test-service:dev -f test-service/Dockerfile test-service
   - kubectl apply -f k8s
 devs:
   - admin-service/okteto.yml
   - gateway-service/okteto.yml
-  - organization-service/okteto.yml
+  - organization-service/okteto.
+  - test-service/okteto.yml
