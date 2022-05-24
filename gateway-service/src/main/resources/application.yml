@@ -22,6 +22,12 @@ spring:
             - Path=/test/**
           filters:
             - RewritePath=/test/(?<path>.*), /$\{path}
+        - id: user
+          uri: lb://user
+          predicates:
+            - Path=/users/**
+          filters:
+            - RewritePath=/user/(?<path>.*), /$\{path}
 logging:
   pattern: 
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
