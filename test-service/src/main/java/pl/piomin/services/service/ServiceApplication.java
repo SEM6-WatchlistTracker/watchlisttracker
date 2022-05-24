@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class ServiceApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(OrganizationApplication.class, args);
+		SpringApplication.run(ServiceApplication.class, args);
 	}
 
 }
