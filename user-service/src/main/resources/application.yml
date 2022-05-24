@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: user
+  data:
+    mongodb:
+      uri: mongodb+srv://admin-user:IldownVlfUPbyFtE@user-repository.z68aw.mongodb.net/user-database?retryWrites=true&w=majority
+      database: user-database
+      
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
