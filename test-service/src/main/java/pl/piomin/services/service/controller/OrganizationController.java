@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pl.piomin.services.organization.client.DepartmentClient;
-import pl.piomin.services.organization.client.EmployeeClient;
-import pl.piomin.services.organization.model.Organization;
-import pl.piomin.services.organization.repository.OrganizationRepository;
+import pl.piomin.services.service.client.DepartmentClient;
+import pl.piomin.services.service.client.EmployeeClient;
+import pl.piomin.services.service.model.Organization;
+import pl.piomin.services.service.repository.OrganizationRepository;
 
 @RestController
 @RequestMapping()

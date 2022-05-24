@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import pl.piomin.services.organization.model.Employee;
+import pl.piomin.services.service.model.Employee;
 
 @FeignClient(name = "employee")
 public interface EmployeeClient {
