@@ -13,9 +13,9 @@ import pl.piomin.services.organization.model.Department;
 public interface OrganizationClient {
 
 	@GetMapping("/organization/{organizationId}")
-	public List<Department> findByOrganization(@PathVariable("organizationId") ObjectId organizationId);
+	public List<Department> findByOrganization(@PathVariable("organizationId") String organizationId);
 	
 	@GetMapping("/organization/{organizationId}/with-employees")
-	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") ObjectId organizationId);
+	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") String organizationId);
 	
 }

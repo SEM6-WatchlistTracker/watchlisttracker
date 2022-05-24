@@ -13,6 +13,6 @@ import pl.piomin.services.organization.model.Employee;
 public interface EmployeeClient {
 
 	@GetMapping("/organization/{organizationId}")
-	List<Employee> findByOrganization(@PathVariable("organizationId") ObjectId organizationId);
+	List<Employee> findByOrganization(@PathVariable("organizationId") String organizationId);
 	
 }

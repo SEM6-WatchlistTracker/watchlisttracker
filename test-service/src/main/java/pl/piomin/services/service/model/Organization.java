@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Organization {
 
 	@Id
-	private ObjectId id;
+	private String id;
 	private String name;
 	private String address;
 	private List<Department> departments = new ArrayList<>();
@@ -26,11 +26,11 @@ public class Organization {
 		this.address = address;
 	}
 
-	public ObjectId getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
