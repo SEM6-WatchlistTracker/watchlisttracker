@@ -23,7 +23,7 @@ import pl.piomin.services.organization.model.Organization;
 import pl.piomin.services.organization.repository.OrganizationRepository;
 
 @RestController
-@RequestMapping("/organizations")
+@RequestMapping("/")
 public class OrganizationController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
@@ -35,7 +35,7 @@ public class OrganizationController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@GetMapping()
+	@GetMapping("/")
 	public List<Organization> findAll() {
 		LOGGER.info("Organization find");
 		return repository.findAll();
