@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.piomin.services.service.client.DepartmentClient;
 import pl.piomin.services.service.client.EmployeeClient;
 import pl.piomin.services.service.model.Organization;
+import pl.piomin.services.service.model.Department;
 import pl.piomin.services.service.repository.OrganizationRepository;
 
 @RestController
