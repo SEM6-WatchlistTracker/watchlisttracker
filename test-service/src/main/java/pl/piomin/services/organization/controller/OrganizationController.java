@@ -23,7 +23,7 @@ import pl.piomin.services.organization.model.Organization;
 import pl.piomin.services.organization.repository.OrganizationRepository;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping()
 public class OrganizationController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
@@ -51,6 +51,12 @@ public class OrganizationController {
 	public Organization findByIdTest(@RequestParam("id") ObjectId id) {
 		LOGGER.info("test find requestvar: id={}", id);
 		return repository.findById(id).get();
+	}
+
+	@GetMapping("/testing")
+	public String testing() {
+		LOGGER.info("test testing");
+		return "test/testing";
 	}
 
 	@RequestMapping(path="/test", method = RequestMethod.GET) 
