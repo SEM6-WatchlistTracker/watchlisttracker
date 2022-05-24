@@ -35,7 +35,7 @@ public class OrganizationController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@GetMapping("/")
+	@GetMapping()
 	public List<Organization> findAll() {
 		LOGGER.info("Organization find");
 		return repository.findAll();

@@ -35,7 +35,7 @@ public class OrganizationController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@GetMapping("/")
+	@GetMapping()
 	public List<Organization> findAll() {
 		LOGGER.info("test find");
 		return repository.findAll();
@@ -57,14 +57,14 @@ public class OrganizationController {
 	@ResponseBody
 	public String test() {
 		LOGGER.info("test test");
-		return "test";
+		return "test/test";
 	}
 
 	@RequestMapping(value="/test2", method = RequestMethod.GET) 
 	@ResponseBody
 	public String test2() {
 		LOGGER.info("test test2");
-		return "test2";
+		return "test/test2";
 	}
 
 	@PostMapping
