@@ -11,6 +11,8 @@
 		<module>organization-service</module>
 		<module>test-service</module>
 		<module>user-service</module>
+		<module>collablist-service</module>
+		<module>mediastats-service</module>
 		<module>gateway-service</module>
 	</modules>
 	

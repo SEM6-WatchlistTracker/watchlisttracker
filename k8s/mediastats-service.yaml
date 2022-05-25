@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediastats
+  labels:
+    app: mediastats
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mediastats
+  template:
+    metadata:
+      labels:
+        app: mediastats
+    spec:
+      containers:
+      - name: mediastats
+        image: okteto.dev/mediastats-service:dev
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mediastats
+  labels:
+    app: mediastats
+    spring-boot: "true"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: mediastats
