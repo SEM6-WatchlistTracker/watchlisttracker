@@ -10,24 +10,24 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: organization
-          uri: lb://organization
-          predicates:
-            - Path=/organizations/**
-          filters:
-            - RewritePath=/organizations/(?<path>.*), /$\{path}
-        - id: test
-          uri: lb://test
-          predicates:
-            - Path=/test/**
-          filters:
-            - RewritePath=/test/(?<path>.*), /$\{path}
         - id: user
           uri: lb://user
           predicates:
             - Path=/users/**
           filters:
             - RewritePath=/users/(?<path>.*), /$\{path}
+        - id: collablist
+          uri: lb://collablist
+          predicates:
+            - Path=/friendswatchlists/**
+          filters:
+            - RewritePath=/friendswatchlists/(?<path>.*), /$\{path}
+        - id: mediastats
+          uri: lb://mediastats
+          predicates:
+            - Path=/mediastatistics/**
+          filters:
+            - RewritePath=/mediastatistics/(?<path>.*), /$\{path}
 logging:
   pattern: 
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
