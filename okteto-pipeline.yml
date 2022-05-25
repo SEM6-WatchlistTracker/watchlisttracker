@@ -1,6 +1,6 @@
 icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
-# destroy:
-#   - okteto destroy
+destroy:
+  - okteto destroy
 deploy:
   - okteto build -t okteto.dev/admin-service:dev -f admin-service/Dockerfile admin-service
   - okteto build -t okteto.dev/gateway-service:dev -f gateway-service/Dockerfile gateway-service
@@ -8,7 +8,6 @@ deploy:
   - okteto build -t okteto.dev/test-service:dev -f test-service/Dockerfile test-service
   - okteto build -t okteto.dev/user-service:dev -f user-service/Dockerfile user-service
   - kubectl apply -f k8s
-  - okteto restart okteto.dev/user-service:dev #test
 devs:
   - admin-service/okteto.yml
   - gateway-service/okteto.yml
