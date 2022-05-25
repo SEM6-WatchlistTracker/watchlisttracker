@@ -2,23 +2,17 @@ icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
 deploy:
   - okteto build -t okteto.dev/admin-service:dev -f admin-service/Dockerfile admin-service
   - okteto build -t okteto.dev/gateway-service:dev -f gateway-service/Dockerfile gateway-service
-  - okteto build -t okteto.dev/organization-service:dev -f organization-service/Dockerfile organization-service
-  - okteto build -t okteto.dev/test-service:dev -f test-service/Dockerfile test-service
   - okteto build -t okteto.dev/user-service:dev -f user-service/Dockerfile user-service
   - okteto build -t okteto.dev/collablist-service:dev -f collablist-service/Dockerfile collablist-service
   - okteto build -t okteto.dev/mediastats-service:dev -f mediastats-service/Dockerfile mediastats-service
   - kubectl apply -f k8s
   - kubectl rollout restart deployment/gateway
-  - kubectl rollout restart deployment/organization
-  - kubectl rollout restart deployment/test
   - kubectl rollout restart deployment/user
   - kubectl rollout restart deployment/collablist
   - kubectl rollout restart deployment/mediastats
 devs:
   - admin-service/okteto.yml
   - gateway-service/okteto.yml
-  - organization-service/okteto.yml
-  - test-service/okteto.yml
   - user-service/okteto.yml
   - collablist-service/okteto.yml
   - mediastats-service/okteto.yml
