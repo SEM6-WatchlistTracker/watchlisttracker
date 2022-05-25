@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class FwlRequest {
     @Id private String listId; // equal to FwlList
     private String listName;
-    @Id private String ownerId;
-    @Id private String memberId;
+    private String ownerId;
+    private String memberId;
     private Date sentOn;
 
     public String getListId() {

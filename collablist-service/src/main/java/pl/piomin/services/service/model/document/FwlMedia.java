@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("media")
 public class FwlMedia { // position?
     @Id private String id;
-    @Id private String listId;
+    private String listId;
     private Integer mediaId;
     private String progression;
     private Status status;
