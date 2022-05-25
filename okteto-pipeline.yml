@@ -6,6 +6,9 @@ deploy:
   - okteto build -t okteto.dev/test-service:dev -f test-service/Dockerfile test-service
   - okteto build -t okteto.dev/user-service:dev -f user-service/Dockerfile user-service
   - kubectl apply -f k8s
+  - kubectl rollout restart deployment/gateway
+  - kubectl rollout restart deployment/organization
+  - kubectl rollout restart deployment/test
   - kubectl rollout restart deployment/user
 devs:
   - admin-service/okteto.yml
