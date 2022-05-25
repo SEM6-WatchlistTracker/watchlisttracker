@@ -12,11 +12,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 // import org.springframework.retry.annotation.Backoff;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/mediastatistics")
 public class MediaStatisticsController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MediaStatisticsController.class);
     @Autowired private MediaStatisticsService msService;
