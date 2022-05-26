@@ -11,6 +11,19 @@ jobs:
   deploy-to-okteto:
     runs-on: ubuntu-latest
     steps:
+      - uses: okteto/context@latest
+    
+      - name: "Activate Namespace"
+        uses: okteto/namespace@latest
+        with:
+          name: polishedstudios
+    
+      - name: "Deploy application"
+        uses: okteto/apply@latest
+        with:
+          namespace: polishedstudios
+          manifest: okteto-pipeline.yaml
+        
       - name: "Push changes"
         uses: okteto/push@latest
         with:
