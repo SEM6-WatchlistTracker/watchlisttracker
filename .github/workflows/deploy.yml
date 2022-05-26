@@ -20,11 +20,10 @@ jobs:
         with:
           name: polishedstudios
           
-      - name: "Build admin-service"
+      - name: "Build"
         uses: okteto/build@latest
         with:
-          path: admin-service
-          file: Dockerfile
+          file: okteto-pipeline.yml
     
       - name: "Deploy application"
         uses: okteto/apply@latest
