@@ -27,7 +27,7 @@ public class MediaStatisticsController {
     }
 
     // @RetryableTopic(attempts = "3", backoff = @Backoff(delay = 2_000, maxDelay = 10_000, multiplier = 2))
-    @KafkaListener(groupId = "mediastatistics", topics = "mediastatistics")
+    @KafkaListener(topics = "mediastatistics")
     public void updateStatistics(String receivedMessage) {
         LOGGER.info("Received request to update media statistic");
         msService.processMessage(receivedMessage);

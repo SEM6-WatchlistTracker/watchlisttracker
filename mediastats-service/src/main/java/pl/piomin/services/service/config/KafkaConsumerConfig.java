@@ -23,6 +23,9 @@ public class KafkaConsumerConfig {
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
                 "kafka:9092");
         configProps.put(
+                ConsumerConfig.GROUP_ID_CONFIG, 
+                "mediastatistics");
+        configProps.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);
         configProps.put(
