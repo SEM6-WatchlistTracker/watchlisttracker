@@ -1,7 +1,7 @@
 package pl.piomin.services.service.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.StringSerializer;
+import com.fasterxml.jackson.databind.deser.std.StringDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -27,10 +27,10 @@ public class KafkaConsumerConfig {
                 "mediastatistics");
         configProps.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-                StringSerializer.class);
+                StringDeserializer.class);
         configProps.put(
                 ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                StringSerializer.class);
+                StringDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(configProps);
     }
 
