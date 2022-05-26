@@ -11,5 +11,8 @@ jobs:
   deploy-to-okteto:
     runs-on: ubuntu-latest
     steps:
-      - name: Okteto Pipeline
-        uses: okteto/pipeline@1.14.5
+      - name: "Push changes"
+        uses: okteto/push@latest
+        with:
+          namespace: polishedstudios
+          name: watchlisttracker
