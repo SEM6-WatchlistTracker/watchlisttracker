@@ -17,6 +17,8 @@ import pl.piomin.services.service.repository.FwlListRepository;
 import pl.piomin.services.service.repository.FwlMediaRepository;
 import pl.piomin.services.service.repository.FwlRequestRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class FwlService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FwlService.class);
     @Autowired private FwlListRepository fwlListRepository;
     @Autowired private FwlRequestRepository fwlRequestRepository;
     @Autowired private FwlMediaRepository fwlMediaRepository;
@@ -80,7 +83,7 @@ public class FwlService {
                 .bodyToMono(User.class);
             User foundUser = response.block();
             user.setDisplayName(foundUser.getDisplayName());
-        } catch (Exception e) { System.out.println("Could not reach user service.");} 
+        } catch (Exception e) { LOGGER.info("Could not reach user service.");} 
         return user;
     }
 
@@ -148,7 +151,7 @@ public class FwlService {
                     notFirst = true;
                 }
                 try { this.kafka.send("mediastatistics", bulkMessage.toString()); } 
-                catch (Exception e) { System.out.println("Kafka offline."); }
+                catch (Exception e) { LOGGER.info("Kafka offline."); }
                 fwlMediaRepository.deleteAllByListId(listId);
             }
             deleteRequest(listId);
@@ -244,7 +247,7 @@ public class FwlService {
             FwlMedia savedMedia = fwlMediaRepository.save(media);
             KafkaUpdateMessage message = new KafkaUpdateMessage(mediaId, null, Status.Added);
             try { this.kafka.send("mediastatistics", message.toString()); } 
-            catch (Exception e) { System.out.println("Kafka offline."); }
+            catch (Exception e) { LOGGER.info("Kafka offline."); }
             return savedMedia;
         }
         return null;
@@ -259,7 +262,7 @@ public class FwlService {
                 media.setLastUpdated(new Date());
                 KafkaUpdateMessage message = new KafkaUpdateMessage(mediaId, previousStatus, media.getStatus());
                 try { this.kafka.send("mediastatistics", message.toString()); } 
-                catch (Exception e) { System.out.println("Kafka offline."); }
+                catch (Exception e) { LOGGER.info("Kafka offline."); }
                 return fwlMediaRepository.save(media);
             }
         }
@@ -271,7 +274,7 @@ public class FwlService {
         if (media != null) {
             KafkaUpdateMessage message = new KafkaUpdateMessage(mediaId, media.getStatus(), null);
             try { this.kafka.send("mediastatistics", message.toString()); } 
-            catch (Exception e) { System.out.println("Kafka offline."); }
+            catch (Exception e) { LOGGER.info("Kafka offline."); }
             fwlMediaRepository.delete(media);
         }
     }
