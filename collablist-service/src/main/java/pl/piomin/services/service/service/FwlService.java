@@ -29,7 +29,7 @@ public class FwlService {
     @Autowired private FwlListRepository fwlListRepository;
     @Autowired private FwlRequestRepository fwlRequestRepository;
     @Autowired private FwlMediaRepository fwlMediaRepository;
-    @Autowired private KafkaTemplate<Object, Object> kafka;
+    @Autowired private KafkaTemplate<String, String> kafka;
 
     // Lists \\
 
