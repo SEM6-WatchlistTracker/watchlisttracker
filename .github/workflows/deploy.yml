@@ -20,7 +20,7 @@ jobs:
         with:
           name: polishedstudios
           
-      - name: "Trigger the pipeline"
+      - name: "Deploy to Okteto"
         uses: okteto/pipeline@latest
         with:
-          name: pr-${{ github.event.number }}
+          name: CD
