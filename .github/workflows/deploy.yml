@@ -24,7 +24,7 @@ jobs:
         uses: okteto/build@latest
         with:
           path: admin-service
-          file: admin-service/Dockerfile
+          file: Dockerfile
     
       - name: "Deploy application"
         uses: okteto/apply@latest
