@@ -23,7 +23,7 @@ jobs:
       - name: "Build admin-service"
         uses: okteto/build@latest
         with:
-          file: admin-service/Dockerfile
+          path: amdin-service
     
       - name: "Deploy application"
         uses: okteto/apply@latest
