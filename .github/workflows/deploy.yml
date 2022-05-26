@@ -20,19 +20,7 @@ jobs:
         with:
           name: polishedstudios
           
-      - name: "Build"
-        uses: okteto/build@latest
+      - name: "Trigger the pipeline"
+        uses: okteto/pipeline@latest
         with:
-          file: okteto-pipeline.yml
-    
-      - name: "Deploy application"
-        uses: okteto/apply@latest
-        with:
-          namespace: polishedstudios
-          manifest: k8s
-        
-      - name: "Push changes"
-        uses: okteto/push@latest
-        with:
-          namespace: polishedstudios
-          name: watchlisttracker
+          name: pr-${{ github.event.number }}
