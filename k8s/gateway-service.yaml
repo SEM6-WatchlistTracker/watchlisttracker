@@ -26,6 +26,7 @@ metadata:
   name: gateway
   labels:
     app: gateway
+    spring-boot: "true"
 spec:
   type: ClusterIP
   ports:
