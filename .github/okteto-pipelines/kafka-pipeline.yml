@@ -1,0 +1,4 @@
+icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
+deploy:
+  - helm repo add bitnami https://charts.bitnami.com/bitnami
+  - helm upgrade --install kafka bitnami/kafka -f ../../kafka/values.yml --version 14.5.0

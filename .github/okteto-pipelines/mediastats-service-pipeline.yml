@@ -1,0 +1,7 @@
+icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
+deploy:
+  - okteto build -t okteto.dev/mediastats-service:dev -f ../../mediastats-service/Dockerfile ../../mediastats-service
+  - kubectl apply -f ../../k8s/mediastats-service.yaml
+  - kubectl rollout restart deployment/mediastats
+devs:
+  - ../../mediastats-service/okteto.yml

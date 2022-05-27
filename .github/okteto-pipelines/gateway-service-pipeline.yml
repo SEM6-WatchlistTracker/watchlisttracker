@@ -1,0 +1,8 @@
+icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
+deploy:
+  - okteto build -t okteto.dev/gateway-service:dev -f ../../gateway-service/Dockerfile ../../gateway-service
+  - kubectl apply -f ../../k8s/gateway-service.yaml
+  - kubectl apply -f ../../k8s/ingress.yaml
+  - kubectl rollout restart deployment/gateway
+devs:
+  - ../../gateway-service/okteto.yml

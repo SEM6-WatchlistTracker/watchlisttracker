@@ -2,5 +2,6 @@ icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
 deploy:
   - okteto build -t okteto.dev/admin-service:dev -f ../../admin-service/Dockerfile ../../admin-service
   - kubectl apply -f ../../k8s/admin-service.yaml
+  - kubectl rollout restart deployment/admin
 devs:
   - ../../admin-service/okteto.yml

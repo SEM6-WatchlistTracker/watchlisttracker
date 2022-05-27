@@ -1,0 +1,7 @@
+icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
+deploy:
+  - okteto build -t okteto.dev/user-service:dev -f ../../user-service/Dockerfile ../../user-service
+  - kubectl apply -f ../../k8s/user-service.yaml
+  - kubectl rollout restart deployment/user
+devs:
+  - ../../user-service/okteto.yml

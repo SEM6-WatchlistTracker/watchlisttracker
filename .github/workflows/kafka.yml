@@ -1,9 +1,9 @@
-name: Admin Service
+name: Kafka
 
 on:
   push:
     branches: [ main ]
-    paths: [ admin-service/** ]
+    paths: [ kafka/** ]
 
   workflow_dispatch: # Allows manually workflow
 
@@ -20,8 +20,8 @@ jobs:
         with:
           namespace: polishedstudios
           
-      - name: "Deploy Admin Service to Okteto"
+      - name: "Deploy Kafka to Okteto"
         uses: okteto/pipeline@latest
         with:
           name: watchlisttracker
-          filename: .github/okteto-pipelines/admin-service-pipeline.yml
+          filename: .github/okteto-pipelines/kafka-pipeline.yml

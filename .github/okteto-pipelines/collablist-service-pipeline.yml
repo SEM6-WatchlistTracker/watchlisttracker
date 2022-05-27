@@ -1,0 +1,7 @@
+icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
+deploy:
+  - okteto build -t okteto.dev/collablist-service:dev -f ../../collablist-service/Dockerfile ../../collablist-service
+  - kubectl apply -f ../../k8s/collablist-service.yaml
+  - kubectl rollout restart deployment/collablist
+devs:
+  - ../../collablist-service/okteto.yml
