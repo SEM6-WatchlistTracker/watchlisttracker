@@ -55,10 +55,12 @@ public class FwlService {
             String collaboratorId = new String();
             if (!list.getOwnerId().equals(userId)) collaboratorId = list.getOwnerId();
             if (list.getMemberId() != null) if (!list.getMemberId().equals(userId)) collaboratorId = list.getMemberId();
-            if (!usedIds.contains(collaboratorId)) {
-                foundUser = getUser(collaboratorId);
-                foundUsers.add(foundUser);
-                usedIds.add(collaboratorId);
+            if (!collaboratorId.equals("")) {
+                if (!usedIds.contains(collaboratorId)) {
+                    foundUser = getUser(collaboratorId);
+                    foundUsers.add(foundUser);
+                    usedIds.add(collaboratorId);
+                }
             }
         }
         List<FwlListModified> lists = new ArrayList<>();
@@ -95,7 +97,7 @@ public class FwlService {
             if (!foundList.getOwnerId().equals(userId)) collaboratorId = foundList.getOwnerId();
             if (foundList.getMemberId() != null) if (!foundList.getMemberId().equals(userId)) collaboratorId = foundList.getMemberId();
             User collaborator = new User();
-            if (collaboratorId.isBlank()) collaborator = getUser(collaboratorId);
+            if (!collaboratorId.equals("")) collaborator = getUser(collaboratorId);
             else collaborator = null;
             FwlListModified modifiedList = new FwlListModified(foundList.getListId(), foundList.getListName(), collaborator, foundList.getLastUpdated());
             return modifiedList;
