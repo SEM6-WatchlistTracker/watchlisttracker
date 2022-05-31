@@ -67,7 +67,9 @@ public class FwlService {
         for (FwlList list : foundLists) {
             User collaborator = new User();
             for (User user : foundUsers) {
-                if (list.getMemberId() != null) if (list.getOwnerId().equals(user.getUserId()) || list.getMemberId().equals(user.getUserId())) collaborator = user;
+                if (list.getMemberId() != null) { 
+                    if (list.getOwnerId().equals(user.getUserId()) || list.getMemberId().equals(user.getUserId())) collaborator = user;
+                }
                 else collaborator = null;
             }
             FwlListModified modifiedList = new FwlListModified(list.getListId(), list.getListName(), collaborator, list.getLastUpdated());
