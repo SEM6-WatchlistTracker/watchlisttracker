@@ -52,7 +52,7 @@ public class FwlService {
         List<User> foundUsers = new ArrayList<>(); // adds user to a list to reduce load
         for (FwlList list : foundLists) {
             User foundUser = new User();
-            String collaboratorId = "";
+            String collaboratorId = new String();
             if (!list.getOwnerId().equals(userId)) collaboratorId = list.getOwnerId();
             if (list.getMemberId() != null) if (!list.getMemberId().equals(userId)) collaboratorId = list.getMemberId();
             if (!usedIds.contains(collaboratorId)) {
