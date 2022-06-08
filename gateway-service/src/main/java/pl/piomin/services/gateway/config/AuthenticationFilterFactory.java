@@ -1,9 +1,6 @@
 package pl.piomin.services.gateway.config;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,15 +27,14 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
         return ((exchange, chain) -> {
             LOGGER.info("Received request.");
             ServerHttpRequest request = exchange.getRequest();
-
             if (isSecured(request)) {
                 LOGGER.info("Is secured request.");
                 if (this.isAuthMissing(request)) return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
-                final String token = this.getAuthHeader(request);
-                String jwtToken = token.split(" ")[1].trim();
+                final String authHeader = this.getAuthHeader(request);
+                String token = authHeader.split(" ")[1].trim();
                 DecodedJWT jwt = null;
                 try {
-                    jwt = jwtUtil.verifyAndGetClaims(jwtToken);
+                    jwt = jwtUtil.verifyAndGetClaims(token);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -57,15 +53,9 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
         String path = request.getPath().toString();
         boolean isSecured = true;
         for (String endpoint : openApiEndpoints) {
-            LOGGER.info("path: " + path + " endpoint: " + endpoint);
-            if (path.contains(endpoint)) {
-                isSecured = false;
-                LOGGER.info("secured is false");
-            }
+            if (path.contains(endpoint)) isSecured = false;
         }
-        LOGGER.info("isSecured: " + isSecured);
         return isSecured;
-        // return !Arrays.asList(openApiEndpoints).contains(request.getPath().toString());
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
@@ -88,6 +78,7 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
                 .header("userId", userId)
                 .build();
     }
+    
 
 	@Override
 	public Class<Config> getConfigClass() {
