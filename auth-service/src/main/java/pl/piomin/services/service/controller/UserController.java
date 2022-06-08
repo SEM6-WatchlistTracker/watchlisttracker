@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@FormParam("email") String email, @FormParam("password") String password) {
-        LOGGER.info("Signing in user " + email);
+        LOGGER.info("Signing in user " + email); 
         String token = authService.signIn(email, password);
         return ResponseEntity.ok(token);
     }
