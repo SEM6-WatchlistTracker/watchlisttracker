@@ -52,7 +52,7 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
                 "/auth/signUp",
                 "/users/get/"
         };
-        LOGGER.info("path= " + request.getPath().toString());
+        LOGGER.info("uri path= " + request.getURI().getPath().toString());
         return !Arrays.asList(openApiEndpoints).contains(request.getPath().toString());
     }
 
