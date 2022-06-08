@@ -1,6 +1,7 @@
 package pl.piomin.services.gateway.config;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -19,14 +20,14 @@ import reactor.core.publisher.Mono;
 @RefreshScope
 @Component
 public class AuthenticationFilter implements GatewayFilter {
-    @Autowired private RouterValidator routerValidator;
+    // @Autowired private RouterValidator routerValidator;
     @Autowired private JwtUtil jwtUtil;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
 
-        if (routerValidator.isSecured.test(request)) {
+        if (isSecured(request)) {
             if (this.isAuthMissing(request)) return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
             final String token = this.getAuthHeader(request);
             String jwtToken = token.split(" ")[1].trim();
@@ -39,6 +40,14 @@ public class AuthenticationFilter implements GatewayFilter {
             this.populateRequestWithHeaders(exchange, jwt);
         }
         return chain.filter(exchange);
+    }
+
+    private boolean isSecured(ServerHttpRequest request) {
+        final String[] openApiEndpoints = new String[]{
+                "/auth/signIn",
+                "/auth/signUp"
+        };
+        return !Arrays.asList(openApiEndpoints).contains(request.getPath().toString());
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
