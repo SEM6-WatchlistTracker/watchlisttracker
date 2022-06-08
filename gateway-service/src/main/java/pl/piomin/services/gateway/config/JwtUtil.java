@@ -19,9 +19,4 @@ public class JwtUtil {
                 .build();
         return verifier.verify(token);
     }
-
-    public String getUserIdFromToken(DecodedJWT jwt) throws UnsupportedEncodingException {
-        String userId = jwt.getClaim("userId").toString();
-        return userId;
-    }
 }

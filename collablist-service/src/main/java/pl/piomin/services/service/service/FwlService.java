@@ -83,7 +83,7 @@ public class FwlService {
         try {
             WebClient client = WebClient.create("https://watchlisttracker-polishedstudios.cloud.okteto.net/");
             Mono<User> response = client.get()
-                .uri("/users/" + userId)
+                .uri("/users/get/" + userId)
                 .retrieve()
                 .bodyToMono(User.class);
             User foundUser = response.block();
