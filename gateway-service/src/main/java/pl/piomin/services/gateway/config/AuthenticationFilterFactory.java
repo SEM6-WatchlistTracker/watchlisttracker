@@ -48,7 +48,7 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
 		});
 	}
 
-    public static final List<String> openApiEndpoints = List.of(
+    private List<String> openApiEndpoints = List.of(
             "/auth/signup",
             "/auth/signin",
             "/users/get/"
