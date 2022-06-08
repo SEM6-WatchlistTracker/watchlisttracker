@@ -1,0 +1,27 @@
+name: Auth Service
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ auth-service/** ]
+
+  workflow_dispatch: # Allows manually workflow
+
+jobs:
+  deploy-to-okteto:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: okteto/context@latest
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+    
+      - name: "Activate Namespace"
+        uses: okteto/namespace@latest
+        with:
+          namespace: polishedstudios
+          
+      - name: "Deploy Auth Service to Okteto"
+        uses: okteto/pipeline@latest
+        with:
+          name: watchlisttracker
+          filename: .github/okteto-pipelines/auth-service-pipeline.yml

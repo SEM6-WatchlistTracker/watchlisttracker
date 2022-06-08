@@ -9,7 +9,7 @@
 	<modules>
 		<module>admin-service</module>
 		<module>organization-service</module>
-		<module>test-service</module>
+		<module>auth-service</module>
 		<module>user-service</module>
 		<module>collablist-service</module>
 		<module>mediastats-service</module>

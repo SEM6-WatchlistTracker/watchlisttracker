@@ -1,4 +1,4 @@
-name: gateway
+name: auth
 image: okteto/maven:latest
 command: bash
 workdir: /okteto
@@ -10,5 +10,5 @@ forward:
   - 5005:5005
 resources:
   limits:
-    cpu: "2"
+    cpu: "1"
     memory: 3Gi
