@@ -21,7 +21,7 @@ spring:
           predicates:
             - Path=/users/**
           filters:
-            - AuthenticationFilter
+            - AuthenticationFilterFactory
             - RewritePath=/users/(?<path>.*), /$\{path}
         - id: collablist
           uri: lb://collablist
