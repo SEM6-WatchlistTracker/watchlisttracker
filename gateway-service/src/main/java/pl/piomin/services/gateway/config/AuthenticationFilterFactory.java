@@ -30,6 +30,7 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
             ServerHttpRequest request = exchange.getRequest();
 
             if (isSecured(request)) {
+                LOGGER.info("Is secured request.");
                 if (this.isAuthMissing(request)) return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
                 final String token = this.getAuthHeader(request);
                 String jwtToken = token.split(" ")[1].trim();
@@ -51,6 +52,7 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
                 "/auth/signUp",
                 "/users/get/"
         };
+        LOGGER.info("path= " + request.getPath().toString());
         return !Arrays.asList(openApiEndpoints).contains(request.getPath().toString());
     }
 
