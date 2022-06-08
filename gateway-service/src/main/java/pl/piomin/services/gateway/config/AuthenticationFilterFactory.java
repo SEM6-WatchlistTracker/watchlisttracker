@@ -31,7 +31,7 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
             LOGGER.info("Received request.");
             ServerHttpRequest request = exchange.getRequest();
 
-            if (isSecured.test(request)) {
+            if (isSecured(request)) {
                 LOGGER.info("Is secured request.");
                 if (this.isAuthMissing(request)) return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
                 final String token = this.getAuthHeader(request);
@@ -57,11 +57,13 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
         String path = request.getPath().toString();
         boolean isSecured = true;
         for (String endpoint : openApiEndpoints) {
-            LOGGER.info("path:" + path + " endpoint:" + endpoint);
+            LOGGER.info("path: " + path + " endpoint: " + endpoint);
             if (path.contains(endpoint)) {
                 isSecured = false;
+                LOGGER.info("secured is false");
             }
         }
+        LOGGER.info("isSecured: " + isSecured);
         return isSecured;
         // return !Arrays.asList(openApiEndpoints).contains(request.getPath().toString());
     }
