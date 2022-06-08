@@ -5,6 +5,6 @@ COPY . /code/
 RUN --mount=type=cache,target=/root/.m2 mvn package
 
 FROM openjdk:8-jre-alpine
-COPY --from=build /code/target/user-service-1.1.jar user-service-1.1.jar
+COPY --from=build /code/target/auth-service-1.1.jar auth-service-1.1.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/user-service-1.1.jar"]
+ENTRYPOINT ["java", "-jar", "/auth-service-1.1.jar"]
