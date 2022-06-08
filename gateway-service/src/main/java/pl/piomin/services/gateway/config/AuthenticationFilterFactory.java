@@ -2,6 +2,8 @@ package pl.piomin.services.gateway.config;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +31,7 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
             LOGGER.info("Received request.");
             ServerHttpRequest request = exchange.getRequest();
 
-            if (isSecured(request)) {
+            if (isSecured.test(request)) {
                 LOGGER.info("Is secured request.");
                 if (this.isAuthMissing(request)) return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
                 final String token = this.getAuthHeader(request);
@@ -46,16 +48,27 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
 		});
 	}
 
-    private boolean isSecured(ServerHttpRequest request) {
-        final String[] openApiEndpoints = new String[]{
-                "/auth/signIn",
-                "/auth/signUp",
-                "/users/get/"
-        };
-        LOGGER.info("uri= " + request.getURI().toString());
-        LOGGER.info("uri path= " + request.getURI().getPath().toString());
-        return !Arrays.asList(openApiEndpoints).contains(request.getPath().toString());
-    }
+    public static final List<String> openApiEndpoints = List.of(
+            "/auth/signup",
+            "/auth/signin",
+            "/users/get/"
+    );
+
+    public Predicate<ServerHttpRequest> isSecured =
+            request -> openApiEndpoints
+                    .stream()
+                    .noneMatch(uri -> request.getURI().getPath().contains(uri));
+
+    // private boolean isSecured(ServerHttpRequest request) {
+    //     final String[] openApiEndpoints = new String[]{
+    //             "/auth/signIn",
+    //             "/auth/signUp",
+    //             "/users/get/"
+    //     };
+    //     LOGGER.info("uri= " + request.getURI().toString());
+    //     LOGGER.info("uri path= " + request.getURI().getPath().toString());
+    //     return !Arrays.asList(openApiEndpoints).contains(request.getPath().toString());
+    // }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
         ServerHttpResponse response = exchange.getResponse();
