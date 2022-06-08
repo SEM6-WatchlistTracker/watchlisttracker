@@ -1,20 +1,20 @@
-package pl.piomin.services.gateway.config;
+// package pl.piomin.services.gateway.config;
 
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.stereotype.Component;
+// import org.springframework.http.server.reactive.ServerHttpRequest;
+// import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.function.Predicate;
+// import java.util.List;
+// import java.util.function.Predicate;
 
-@Component
-public class RouterValidator {
-    public static final List<String> openApiEndpoints = List.of(
-            "/auth/signup",
-            "/auth/signin"
-    );
+// @Component
+// public class RouterValidator {
+//     public static final List<String> openApiEndpoints = List.of(
+//             "/auth/signup",
+//             "/auth/signin"
+//     );
 
-    public Predicate<ServerHttpRequest> isSecured =
-            request -> openApiEndpoints
-                    .stream()
-                    .noneMatch(uri -> request.getURI().getPath().contains(uri));
-}
+//     public Predicate<ServerHttpRequest> isSecured =
+//             request -> openApiEndpoints
+//                     .stream()
+//                     .noneMatch(uri -> request.getURI().getPath().contains(uri));
+// }
