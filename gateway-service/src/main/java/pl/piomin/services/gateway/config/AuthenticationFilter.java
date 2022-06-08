@@ -3,6 +3,8 @@ package pl.piomin.services.gateway.config;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -20,11 +22,12 @@ import reactor.core.publisher.Mono;
 @RefreshScope
 @Component
 public class AuthenticationFilter implements GatewayFilter {
-    // @Autowired private RouterValidator routerValidator;
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
     @Autowired private JwtUtil jwtUtil;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        LOGGER.info("Received request.");
         ServerHttpRequest request = exchange.getRequest();
 
         if (isSecured(request)) {
