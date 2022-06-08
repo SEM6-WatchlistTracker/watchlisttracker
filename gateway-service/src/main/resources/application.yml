@@ -20,8 +20,9 @@ spring:
           uri: lb://user
           predicates:
             - Path=/users/**
-          # filters:
-          #   - RewritePath=/users/(?<path>.*), /$\{path}
+          filters:
+            - AuthenticationFilter
+            - RewritePath=/users/(?<path>.*), /$\{path}
         - id: collablist
           uri: lb://collablist
           predicates:
