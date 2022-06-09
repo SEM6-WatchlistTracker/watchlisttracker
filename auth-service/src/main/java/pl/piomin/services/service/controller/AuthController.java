@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-public class UserController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+public class AuthController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
     @Autowired private AuthService authService;
 
     @PostMapping("/signin")

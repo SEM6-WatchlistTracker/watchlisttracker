@@ -46,13 +46,14 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
 
     private boolean isSecured(ServerHttpRequest request) {
         final String[] openApiEndpoints = new String[]{
-                "/auth/signin",
-                "/auth/signup",
-                "/users/get/"
+            "/auth/signup",
+            "/auth/signin",
+            "/users/get/"
         };
         String path = request.getPath().toString();
         boolean isSecured = true;
         for (String endpoint : openApiEndpoints) {
+            LOGGER.info("path: " + path + " , endpoint: " + endpoint);
             if (path.contains(endpoint)) isSecured = false;
         }
         return isSecured;
@@ -75,9 +76,10 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
     private void populateRequestWithHeaders(ServerWebExchange exchange, DecodedJWT jwt) {
         String userId = jwt.getClaim("userId").toString().replaceAll("^\"|\"$", "");
         String role = jwt.getClaim("role").toString().replaceAll("^\"|\"$", "");
+        LOGGER.info(userId);
         exchange.getRequest().mutate()
                 .header("userId", userId)
-                .header("role", role)
+                .header("role", role) 
                 .build();
     }
     
