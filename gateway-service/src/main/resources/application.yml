@@ -9,20 +9,22 @@ spring:
       discovery:
         locator:
           enabled: true
+      default-filters:
+      - name: AuthenticationFilterFactory
       routes:
         - id: auth
           uri: lb://auth
           predicates:
             - Path=/auth/**
           filters:
-            - AuthenticationFilterFactory2
+            # - AuthenticationFilterFactory2
             - RewritePath=/auth/(?<path>.*), /$\{path}
         - id: user
           uri: lb://user
           predicates:
             - Path=/users/**
           filters:
-            - AuthenticationFilterFactory
+            # - AuthenticationFilterFactory
             - RewritePath=/users/(?<path>.*), /$\{path}
         - id: collablist
           uri: lb://collablist
