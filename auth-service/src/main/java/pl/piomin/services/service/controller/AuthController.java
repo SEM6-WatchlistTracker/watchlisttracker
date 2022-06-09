@@ -36,7 +36,7 @@ public class AuthController {
         else return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/deleteaccount/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable String userId,
                 @RequestHeader(value = "userId") String requesterId) {
         if (requesterId.equals(userId)) {
