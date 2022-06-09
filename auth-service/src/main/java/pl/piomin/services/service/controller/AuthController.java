@@ -51,13 +51,23 @@ public class AuthController {
     //     else return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     // }
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/test/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable String userId) {
+        return ResponseEntity.ok("delete test");
+    }
+    @DeleteMapping("/test2/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable String userId,
                 @RequestHeader(value = "userId") String requesterId) {
-        if (requesterId.equals(userId)) {
-            // userService.deleteUser(userId);
-            return new ResponseEntity<>("User deleted.", HttpStatus.OK);
-        }
-        else return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+        return ResponseEntity.ok("delete test2");
     }
+
+    // @DeleteMapping("/delete/{userId}")
+    // public ResponseEntity<String> deleteUser(@PathVariable String userId,
+    //             @RequestHeader(value = "userId") String requesterId) {
+    //     if (requesterId.equals(userId)) {
+    //         // userService.deleteUser(userId);
+    //         return new ResponseEntity<>("User deleted.", HttpStatus.OK);
+    //     }
+    //     else return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+    // }
 }
