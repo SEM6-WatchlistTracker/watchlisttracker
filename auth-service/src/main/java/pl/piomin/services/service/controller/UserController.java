@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("/signup") // add body/param with displayname
+    @PostMapping("/signup")
     public ResponseEntity<NewUser> signUp(@FormParam("email") String email, @FormParam("password") String password, @FormParam("displayName") String displayName) {
         LOGGER.info("Signing up user " + email);
         NewUser createdUser = authService.signUp(email, password, displayName);
