@@ -48,7 +48,8 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
         final String[] openApiEndpoints = new String[]{
             "/auth/signup",
             "/auth/signin",
-            "/users/get/"
+            "/users/get/",
+            "/auth/get/"
         };
         String path = request.getPath().toString();
         boolean isSecured = true;
