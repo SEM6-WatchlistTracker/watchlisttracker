@@ -15,6 +15,7 @@ spring:
           predicates:
             - Path=/auth/**
           filters:
+            - AuthenticationFilterFactory
             - RewritePath=/auth/(?<path>.*), /$\{path}
         - id: user
           uri: lb://user

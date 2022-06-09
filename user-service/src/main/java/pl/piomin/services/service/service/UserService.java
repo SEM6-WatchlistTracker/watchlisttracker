@@ -15,7 +15,6 @@ public class UserService {
     }
 
     public User createUser(User newUser) {
-        // User newUser = new User(user.getUserId(), user.getDisplayName()); // with auth
         User user = new User(newUser.getDisplayName());
         return userRepository.save(user);
     }

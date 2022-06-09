@@ -27,30 +27,37 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable String userId) {
         LOGGER.info("Getting user " + userId);
         User foundUser = userService.getUser(userId);
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
+        if (foundUser != null) return new ResponseEntity<>(foundUser, HttpStatus.OK);
+        else return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/create") // TODO role based auth
-    public ResponseEntity<User> createUser(@RequestBody User newUser) {
-        LOGGER.info("Creating user " + newUser.getDisplayName());
-        User createdUser = userService.createUser(newUser);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    @PostMapping("/create")
+    public ResponseEntity<User> createUser(@RequestBody User newUser,
+                @RequestHeader(value = "role") String requesterRole) {
+        if (requesterRole.equals("ADMIN")) {
+            User createdUser = userService.createUser(newUser);
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        }
+        else return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
     @PutMapping("/update/{userId}")
     public ResponseEntity<User> updateUser(@RequestBody User newUser, @PathVariable String userId,
                 @RequestHeader(value = "userId") String requesterId) {
-        if (requesterId == userId) {
+        if (requesterId.equals(userId)) {
             User updatedUser = userService.updateUser(newUser, userId);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         }
         else return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
 
-    @DeleteMapping("/delete/{userId}") // TODO role based auth
-    public ResponseEntity<String> deleteUser(@PathVariable String userId) {
-        LOGGER.info("Deleting user " + userId);
-        userService.deleteUser(userId);
-        return new ResponseEntity<>("User deleted.", HttpStatus.OK);
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable String userId,
+                @RequestHeader(value = "role") String requesterRole) {
+        if (requesterRole.equals("ADMIN")) {
+            userService.deleteUser(userId);
+            return new ResponseEntity<>("User deleted.", HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 }

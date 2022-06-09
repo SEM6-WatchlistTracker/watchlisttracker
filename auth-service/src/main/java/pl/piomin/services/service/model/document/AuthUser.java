@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import pl.piomin.services.service.model.Role;
 
 @Document("users")
-public class User {
+public class AuthUser {
     @Id private String userId;
     private String email;
     private String password;
@@ -37,9 +37,16 @@ public class User {
         this.role = role;
     }
 
-    public User() {}
+    public AuthUser() {}
 
-    public User(String email, String password, Role role) {
+    public AuthUser(String userId, String email, String password, Role role) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public AuthUser(String email, String password, Role role) {
         this.email = email;
         this.password = password;
         this.role = role;
