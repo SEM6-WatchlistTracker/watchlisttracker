@@ -19,7 +19,7 @@ public class MediaStatisticsController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MediaStatisticsController.class);
     @Autowired private MediaStatisticsService msService;
 
-    @GetMapping("/{mediaId}")
+    @GetMapping("/get/{mediaId}")
     public ResponseEntity<MediaStatistic> getStatisticsOfMedia(@PathVariable Integer mediaId) {
         LOGGER.info("Getting media statistic " + mediaId);
         MediaStatistic foundStat = msService.getStatisticsOfMedia(mediaId);
