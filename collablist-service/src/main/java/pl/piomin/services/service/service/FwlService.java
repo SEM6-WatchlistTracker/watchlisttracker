@@ -95,14 +95,16 @@ public class FwlService {
     public FwlListModified getList(String listId, String userId) {
         FwlList foundList = fwlListRepository.findById(listId).orElse(null);
         if (foundList != null) {
-            String collaboratorId = new String();
-            if (!foundList.getOwnerId().equals(userId)) collaboratorId = foundList.getOwnerId();
-            if (foundList.getMemberId() != null) if (!foundList.getMemberId().equals(userId)) collaboratorId = foundList.getMemberId();
-            User collaborator = new User();
-            if (!collaboratorId.equals("")) collaborator = getUser(collaboratorId);
-            else collaborator = null;
-            FwlListModified modifiedList = new FwlListModified(foundList.getListId(), foundList.getListName(), collaborator, foundList.getLastUpdated());
-            return modifiedList;
+            if (foundList.getOwnerId().equals(userId) || foundList.getMemberId().equals(userId)) {
+                String collaboratorId = new String();
+                if (!foundList.getOwnerId().equals(userId)) collaboratorId = foundList.getOwnerId();
+                if (foundList.getMemberId() != null) if (!foundList.getMemberId().equals(userId)) collaboratorId = foundList.getMemberId();
+                User collaborator = new User();
+                if (!collaboratorId.equals("")) collaborator = getUser(collaboratorId);
+                else collaborator = null;
+                FwlListModified modifiedList = new FwlListModified(foundList.getListId(), foundList.getListName(), collaborator, foundList.getLastUpdated());
+                return modifiedList;
+            }
         }
         return null;
     }

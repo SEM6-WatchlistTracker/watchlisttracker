@@ -13,6 +13,7 @@ import pl.piomin.services.service.service.FwlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,25 +31,28 @@ public class FwlController {
 
     // Lists \\
 
-    @GetMapping() // ?userId={userId}
-    public ResponseEntity<FwlData> getListsOfUser(@RequestParam String userId) {
-        LOGGER.info("Getting lists of user " + userId);
-        FwlData foundLists = fwlService.getListsOfUser(userId);
-        return ResponseEntity.ok(foundLists);
+    @GetMapping()
+    public ResponseEntity<FwlData> getListsOfUser(
+                @RequestHeader(value = "userId") String requesterId) {
+        LOGGER.info("Getting lists of user " + requesterId);
+        FwlData foundLists = fwlService.getListsOfUser(requesterId);
+        return new ResponseEntity<>(foundLists, HttpStatus.OK);
     }
 
-    @GetMapping("/{listId}") // ?userId={userId}
-    public ResponseEntity<FwlListModified> getList(@PathVariable String listId, @RequestParam String userId) {
-        LOGGER.info("Getting list " + listId + " of user " + userId);
-        FwlListModified foundList = fwlService.getList(listId, userId);
-        return ResponseEntity.ok(foundList);
+    @GetMapping("/{listId}")
+    public ResponseEntity<FwlListModified> getList(@PathVariable String listId, 
+                @RequestHeader(value = "userId") String requesterId) {
+        LOGGER.info("Getting list " + listId + " of user " + requesterId);
+        FwlListModified foundList = fwlService.getList(listId, requesterId);
+        if (foundList != null) return new ResponseEntity<>(foundList, HttpStatus.OK);
+        else return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
 
     @PostMapping("/create")
     public ResponseEntity<FwlList> createListAndSendRequest(@RequestBody FwlList newList) {
         LOGGER.info("Creating list and request.");
         FwlList createdList = fwlService.createListAndCreateRequest(newList);
-        return ResponseEntity.ok(createdList);
+        return new ResponseEntity<>(createdList, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{listId}")
@@ -58,10 +62,11 @@ public class FwlController {
         return ResponseEntity.ok(updatedList);
     }
 
-    @PutMapping("/leave/{listId}")  // ?userId={userId}
-    public ResponseEntity<String> leaveList(@PathVariable String listId, @RequestParam String userId) {
-        LOGGER.info("Updating list " + listId + ", user " + userId + " left");
-        fwlService.leaveList(listId, userId);
+    @PutMapping("/leave/{listId}")
+    public ResponseEntity<String> leaveList(@PathVariable String listId,
+                @RequestHeader(value = "userId") String requesterId) {
+        LOGGER.info("Updating list " + listId + ", user " + requesterId + " left");
+        fwlService.leaveList(listId, requesterId);
         return ResponseEntity.ok("Left list.");
     }
 
@@ -74,10 +79,11 @@ public class FwlController {
 
     // Requests \\
 
-    @GetMapping("/requests") // ?userId={userId}
-    public ResponseEntity<List<FwlRequestModified>> getReceivedRequestsOfUser(@RequestParam String userId) {
-        LOGGER.info("Getting requests of user " + userId);
-        List<FwlRequestModified> requests = fwlService.getReceivedRequestsOfUser(userId);
+    @GetMapping("/requests")
+    public ResponseEntity<List<FwlRequestModified>> getReceivedRequestsOfUser(
+                @RequestHeader(value = "userId") String requesterId) {
+        LOGGER.info("Getting requests of user " + requesterId);
+        List<FwlRequestModified> requests = fwlService.getReceivedRequestsOfUser(requesterId);
         return ResponseEntity.ok(requests);
     }
 
@@ -85,7 +91,7 @@ public class FwlController {
     public ResponseEntity<FwlRequest> createRequest(@RequestBody FwlList existingList) {
         LOGGER.info("Creating/re-sending request");
         FwlRequest createdRequest = fwlService.createRequest(existingList);
-        return ResponseEntity.ok(createdRequest);
+        return new ResponseEntity<>(createdRequest, HttpStatus.CREATED);
     }
 
     @PutMapping("/requests/accept/{listId}")
@@ -122,7 +128,7 @@ public class FwlController {
     public ResponseEntity<FwlMedia> addMediaToList(@PathVariable String listId, @PathVariable Integer mediaId) {
         LOGGER.info("Adding media " + mediaId + " to list " + listId);
         FwlMedia createdMedia = fwlService.createMedia(listId, mediaId);
-        return ResponseEntity.ok(createdMedia);
+        return new ResponseEntity<>(createdMedia, HttpStatus.CREATED);
     }
 
     @PutMapping("/{listId}/media/update/{mediaId}")
