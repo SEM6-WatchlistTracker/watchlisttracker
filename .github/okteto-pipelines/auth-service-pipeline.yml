@@ -1,0 +1,7 @@
+icon: https://github.com/okteto/spring-microservices/raw/master/icon.png
+deploy:
+  - okteto build -t okteto.dev/auth-service:dev -f ../../auth-service/Dockerfile ../../auth-service
+  - kubectl apply -f ../../k8s/auth-service.yaml
+  - kubectl rollout restart deployment/auth
+devs:
+  - ../../auth-service/okteto.yml

@@ -1,10 +1,10 @@
 spring:
   application:
-    name: collablist
+    name: auth
   data:
     mongodb:
-      uri: mongodb+srv://admin-user:IldownVlfUPbyFtE@user-repository.z68aw.mongodb.net/collablist-database?retryWrites=true&w=majority
-      database: collablist-database
+      uri: mongodb+srv://admin-user:IldownVlfUPbyFtE@user-repository.z68aw.mongodb.net/auth-database?retryWrites=true&w=majority
+      database: auth-database
       
 logging:
   pattern: 

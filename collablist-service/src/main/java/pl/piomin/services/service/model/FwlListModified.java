@@ -9,7 +9,6 @@ public class FwlListModified {
     private String listName;
     private User collaborator;
     private Date lastUpdated;
-    // could add "open request"
 
     public String getListId() {
         return listId;
