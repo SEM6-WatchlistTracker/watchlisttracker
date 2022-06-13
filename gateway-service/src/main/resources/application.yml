@@ -17,14 +17,12 @@ spring:
           predicates:
             - Path=/auth/**
           filters:
-            # - AuthenticationFilterFactory2
             - RewritePath=/auth/(?<path>.*), /$\{path}
         - id: user
           uri: lb://user
           predicates:
             - Path=/users/**
           filters:
-            # - AuthenticationFilterFactory
             - RewritePath=/users/(?<path>.*), /$\{path}
         - id: collablist
           uri: lb://collablist

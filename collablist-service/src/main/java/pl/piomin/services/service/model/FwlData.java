@@ -4,7 +4,7 @@ import java.util.List;
 
 public class FwlData {
     private List<FwlListModified> lists;
-    private Integer hasRequests; // before: private List<FriendsWatchlistRequest> listRequests;
+    private Integer hasRequests;
 
     public List<FwlListModified> getLists() {
         return lists;

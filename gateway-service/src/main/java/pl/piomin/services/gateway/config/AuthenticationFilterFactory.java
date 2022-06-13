@@ -54,7 +54,6 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
         String path = request.getPath().toString();
         boolean isSecured = true;
         for (String endpoint : openApiEndpoints) {
-            LOGGER.info("path: " + path + " , endpoint: " + endpoint);
             if (path.contains(endpoint)) isSecured = false;
         }
         return isSecured;

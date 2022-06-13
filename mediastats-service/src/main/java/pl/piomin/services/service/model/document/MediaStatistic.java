@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("stats")
 public class MediaStatistic {
-    @Id private Integer mediaId; // unsure if will be Integer or String
+    @Id private Integer mediaId;
     private Integer added;
     private Integer watching;
     private Integer watched;

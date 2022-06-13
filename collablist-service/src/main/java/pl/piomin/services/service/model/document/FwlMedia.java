@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("media")
-public class FwlMedia { // position?
+public class FwlMedia {
     @Id private String id;
     private String listId;
     private Integer mediaId;
