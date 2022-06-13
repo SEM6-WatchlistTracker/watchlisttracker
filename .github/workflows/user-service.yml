@@ -2,7 +2,7 @@ name: User Service
 
 on:
   push:
-    branches: [ main, auth ]
+    branches: [ main ]
     paths: [ user-service/** ]
 
   workflow_dispatch: # Allows manually workflow

@@ -2,7 +2,7 @@ name: Collablist Service
 
 on:
   push:
-    branches: [ main, auth ]
+    branches: [ main ]
     paths: [ collablist-service/** ]
 
   workflow_dispatch: # Allows manually workflow
