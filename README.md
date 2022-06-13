@@ -4,4 +4,4 @@ Spring Boot microservices-based system cloud hosted on Okteto and accessible thr
 
 The following picture illustrates the architecture within Okteto.
 
-<img src="https://raw.githubusercontent.com/SEM6-WatchlistTracker/watchlisttracker/main/architecture.png" title="Architecture">
+<img src="https://raw.githubusercontent.com/SEM6-WatchlistTracker/watchlisttracker/main/Okteto%20Kubernetes%20Architecture.png" title="Architecture">
