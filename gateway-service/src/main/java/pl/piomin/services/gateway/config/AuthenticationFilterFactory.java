@@ -76,7 +76,6 @@ public class AuthenticationFilterFactory implements GatewayFilterFactory<Authent
     private void populateRequestWithHeaders(ServerWebExchange exchange, DecodedJWT jwt) {
         String userId = jwt.getClaim("userId").toString().replaceAll("^\"|\"$", "");
         String role = jwt.getClaim("role").toString().replaceAll("^\"|\"$", "");
-        LOGGER.info(userId);
         exchange.getRequest().mutate()
                 .header("userId", userId)
                 .header("role", role) 
